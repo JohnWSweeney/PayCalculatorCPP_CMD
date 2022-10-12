@@ -9,6 +9,14 @@ float basePay;
 float otPay;
 float totalPay; 
 
+struct taxes
+{
+	float Federal;
+	float State;
+	float SocSec;
+	float Medicare;
+};
+
 float functbasePay()
 {
 	basePay = regHours * payRate * (1-taxRate);
@@ -22,6 +30,15 @@ float functOTPay(float othours)
 	otPay = othours * payRate * otMultiplier * (1 - taxRate);
 	std::cout << "OT pay: $" << otPay << std::endl;
 	return otPay;
+}
+
+auto functTaxes(float basePay)
+{
+	taxes tax;
+	//if(basePay)
+	tax.SocSec = basePay * 0.062;
+	tax.Medicare = basePay * 0.0145;
+	return tax;
 }
 
 int main()
